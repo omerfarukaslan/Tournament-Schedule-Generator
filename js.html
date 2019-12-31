@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tournament Schedule Generator Code JS</title>
+</head>
+<body>
+<script>
+
+// tutorial: https://youtu.be/WAJNfpsq7bk
+// http://omeraslan.net/schedule/js.html?numteam=6&numweek=5
+// omerfarukaslan@gmail.com
+// Thank you
+
+var parts = window.location.search.substr(1).split("&");
+var $_GET = {};
+for (var i = 0; i < parts.length; i++) {
+    var temp = parts[i].split("=");
+    $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+}
+
+var num_team = $_GET['numteam'];
+var num_week = $_GET['numweek'];
+
+if(num_team % 2 != 0){
+	num_team++;
+}
+
+var n2 = (num_team-1)/2;
+
+var teams = new Array();
+for(x = 0; x < num_team; x++){
+	teams[x] = x+1;
+}
+var results = new Array();
+var team1 = "";
+var team2 = "";
+for(x = 0; x < num_week; x++){
+	for(i = 0; i < n2; i++){
+	team1 = teams[Math.ceil(n2 - i -1)];
+	team2 = teams[Math.ceil(n2 + i)];
+	document.write(team1 + " vs " + team2 + "<br>");
+	}
+    document.write("<br>");
+	var tmp = teams[1]; 
+	for(i = 1; i < teams.length-1; i++){
+		teams[i] = teams[i+1];
+	}
+	teams[teams.length-1] = tmp;
+}
+
+</script>
+</body>
+</html>
